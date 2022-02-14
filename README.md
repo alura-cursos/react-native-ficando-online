@@ -8,7 +8,7 @@
   <a href="#information_source-como-usar">Como usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
-## :information_source: O que é o AluraHub?
+## :information_source: O que é a Fake API?
 
 A Fake API é uma forma mais simples de simular o uso de uma API em uma aplicação. Nesse curso é utilizado a biblioteca json-server para simular uma API a partir de um arquivo chamado db.json
 
