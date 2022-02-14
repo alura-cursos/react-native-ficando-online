@@ -28,7 +28,7 @@ No terminal, digite os comandos a seguir:
 # Baixar o json-server
 $ sudo npm install -g json-server
 
-# Executar a API (dentro da pasta projeto-online)
+# Executar a API
 $ json-server --watch db.json
 
 ```
