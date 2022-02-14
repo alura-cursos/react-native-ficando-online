@@ -1,67 +1,43 @@
-<h1 align="center">
-    <img alt="FicandoOnline" title="#FicandoOnline" src=".images/header.jpg" width="100%" />
-</h1>
-
 <h4 align="center"> 
-	AluraHub 
+	AluraHub Fake API
 </h4>
 
 <p align="center">
-  <a href="#information_source-o-que-é-o-ficando-online">O que é o AluraHub?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-o-que-é-o-ficando-online">O que é a Fake API?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-Tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-como-usar">Como usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
 ## :information_source: O que é o AluraHub?
 
-O AluraHub é uma aplicação feita em React Native que permite salvar um perfil com informações como nome da pessoa e uma foto, e possibilita consultar um repositório que armazena dados.
-
-Como ele funciona? O app consome uma API externa, no caso, a API pública do Github ou uma fake API com json-server.
-
-Esse projeto é utilizado no curso 4 da formação base de React Native da plataforma da Alura.
-
-
-<h1 align="center">
-    <img alt="Demonstracao" title="Demonstracao" src=".images/ficando-online-newdesign.gif" width="400px" />
-</h1>
+A Fake API é uma forma mais simples de simular o uso de uma API em uma aplicação. Nesse curso é utilizado a biblioteca json-server para simular uma API a partir de um arquivo chamado db.json
 
 
 ## :rocket: Tecnologias
 
 Esse projeto foi desenvolvido com a utilização das seguintes tecnologias:
-- [React Native][rn]
-- [Expo][expo]
+- [Node.js][nodejs]
 
 ## :information_source: Como usar
 
-Para copiar e executar essa aplicação, você precisa de três pré-requisitos: [Git](https://git-scm.com), [Node.js][nodejs] + [Yarn][yarn] intalados no seu computador.
-
 No terminal, digite os comandos a seguir:
 
-### Baixar e instalar o projeto
+### Instalar e Executar a API
 
 ```bash
-# Clonar esse repositório
-$ git clone https://github.com/alura-cursos/react-native-ficando-online.git
+# Baixar o json-server
+$ sudo npm install -g json-server
 
-# Vá para o ropositório
-$ cd AluraHub
+# Executar a API (dentro da pasta projeto-online)
+$ json-server --watch db.json
 
-# Instale as dependências
-$ npm install
 ```
 
-### Executar o Mobile
+### Para mais detalhes do json-server:
+[json-server](https://github.com/typicode/json-server)
 
-```bash
-# Execute em outro terminal (dentro da pasta AluraHub)
-$ expo start
-```
-
-
-Espero que você utilize ao máximo deste projeto para se aprimorar! E se quiser dar um salve, estou lá no LinkedIn [André Oliveira Cunha](https://www.linkedin.com/in/andr%C3%A9-oliveira-cunha-b26b3a156/). :wave: 
 
 [nodejs]: https://nodejs.org/
-[expo]: https://docs.expo.dev/
+[expo]: https://expo.io/
 [rn]: https://facebook.github.io/react-native/
 [yarn]: https://yarnpkg.com/
