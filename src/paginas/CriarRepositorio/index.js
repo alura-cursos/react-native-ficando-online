@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import estilos from './estilos';
-import api from '../../servicos/api';
+import { CriarNovoRepositorioDoUsuario } from '../../servicos/requisicoes/repositorios';
 
 export default function CriarRepositorio({ route, navigation }) {
     const [nome, setNome] = useState('');
     const [data, setData] = useState('');
 
-    function criarRepositorio() {
-        api.post('/repos', {
-            name: nome,
-            data: data,
-            postId: route.params.id
-        }).then(() => {
+    async function Criar() {
+        const resultado = await CriarNovoRepositorioDoUsuario(nome, data, route.params.id);
+        if (resultado === 'sucesso') {
             Alert.alert('Repositório criado com sucesso!');
-            setNome('')
-            setData('')
             navigation.goBack();
-        }).catch(() => {
+        }
+        else {
             Alert.alert('Erro ao criar o repositório!');
-        });
+        }
     }
 
     return (
@@ -38,7 +34,7 @@ export default function CriarRepositorio({ route, navigation }) {
                 autoCapitalize="none"
                 style={estilos.entrada}
             />
-            <TouchableOpacity style={estilos.botao} onPress={criarRepositorio}>
+            <TouchableOpacity style={estilos.botao} onPress={Criar}>
                 <Text style={estilos.textoBotao}>
                     Criar
                 </Text>

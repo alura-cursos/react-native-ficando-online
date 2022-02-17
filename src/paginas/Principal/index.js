@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
 import estilos from './estilos';
-import api from '../../servicos/api';
+import { BuscarUsuario } from '../../servicos/requisicoes/usuario';
 
 export default function Principal({ navigation }) {
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [usuario, setUsuario] = useState({});
 
-    function buscar() {
-        api.get(`/users?login=${nomeUsuario}`).then(response => {
-            setUsuario(response.data[0]);
+    async function Buscar() {
+        const resultado = await BuscarUsuario(nomeUsuario);
+        if (resultado){
+            setUsuario(resultado);
             setNomeUsuario('');
-        }).catch(error => {
-            console.log(error);
-            Alert.alert('Atenção:', 'Erro ao buscar usuário');
-        });
+        }
+        else {
+            Alert.alert('Usuário não encontrado!');
+            setNomeUsuario('');
+        }
     }
 
     return (
@@ -55,7 +57,7 @@ export default function Principal({ navigation }) {
                     style={estilos.entrada}
                 />
 
-                <TouchableOpacity style={estilos.botao} onPress={buscar}>
+                <TouchableOpacity style={estilos.botao} onPress={Buscar}>
                     <Text style={estilos.textoBotao}>
                         Buscar
                     </Text>

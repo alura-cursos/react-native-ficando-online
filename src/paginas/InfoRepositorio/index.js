@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import estilos from './estilos';
-import api from '../../servicos/api';
+import { DeletarRepositorioDoUsuario, SalvarRepositorioDoUsuario } from '../../servicos/requisicoes/repositorios';
 
 export default function InfoRepositorio({ route, navigation }) {
     const [nome, setNome] = useState(route.params.item.name);
     const [data, setData] = useState(route.params.item.data);
 
-    function salvarRepositorio() {
-        api.put(`/repos/${route.params.item.id}`, {
-            id: route.params.id,
-            name: nome,
-            data: data,
-            postId: route.params.item.postId
-        }).then(() => {
+    async function Salvar() {
+        const resultado = await SalvarRepositorioDoUsuario(route.params.item.id, nome, data, route.params.item.postId);
+        if (resultado === 'sucesso') {
             Alert.alert('Repositório atualizado com sucesso!');
-            setNome('')
-            setData('')
             navigation.goBack();
-        }).catch((e) => {
+        }
+        else {
             Alert.alert('Erro ao atualizar o repositório!');
-            console.log(e);
-        });
+        }
     }
 
-    function deletarRepositorio() {
-        api.delete(`/repos/${route.params.item.id}`).then(() => {
+    async function Deletar() {
+        const resultado = await DeletarRepositorioDoUsuario(route.params.item.id);
+        if (resultado === 'sucesso') {
             Alert.alert('Repositório deletado com sucesso!');
             navigation.goBack();
-        }).catch((e) => {
-            Alert.alert('Erro ao atualizar o repositório!');
-        });
+        }
+        else {
+            Alert.alert('Erro ao deletar o repositório!');
+        }
     }    
 
     return (
@@ -51,7 +47,7 @@ export default function InfoRepositorio({ route, navigation }) {
             />
             <TouchableOpacity 
                 style={estilos.botao} 
-                onPress={salvarRepositorio}
+                onPress={Salvar}
             >
                 <Text style={estilos.textoBotao}>
                     Salvar
@@ -59,7 +55,7 @@ export default function InfoRepositorio({ route, navigation }) {
             </TouchableOpacity>
             <TouchableOpacity 
                 style={[estilos.botao, {backgroundColor: '#DD2B2B', marginTop: 10}]} 
-                onPress={deletarRepositorio}
+                onPress={Deletar}
             >
                 <Text style={estilos.textoBotao}>
                     Deletar
