@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
 import estilos from './estilos';
+import api from '../../servicos/api';
 
 export default function Principal({ navigation }) {
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [usuario, setUsuario] = useState({});
+
+    function Busca(){
+        api.get('/users').then(
+            response => {
+                console.log(response.data)
+            }
+        ).catch(error => {
+            console.log(error)
+        })
+    }
 
     return (
         <ScrollView>
@@ -14,7 +25,7 @@ export default function Principal({ navigation }) {
                     <View style={estilos.imagemArea}>
                         <Image source={{ uri: 'https://avatars.githubusercontent.com/u/54721131?v=4' }} style={estilos.imagem} />
                     </View>
-                    <Text style={estilos.textoNome}>Nome do usuario</Text>
+                    <Text style={estilos.textoNome}>ANDRE</Text>
                     <Text style={estilos.textoEmail}>Email do usuario</Text>
                     <View style={estilos.seguidoresArea}>
                         <View style={estilos.seguidores}>
@@ -39,7 +50,9 @@ export default function Principal({ navigation }) {
                     style={estilos.entrada}
                 />
 
-                <TouchableOpacity style={estilos.botao}>
+                <TouchableOpacity style={estilos.botao}
+                    onPress={Busca}
+                >
                     <Text style={estilos.textoBotao}>
                         Buscar
                     </Text>
