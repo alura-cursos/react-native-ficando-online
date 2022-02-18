@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import estilos from './estilos';
-import { CriarNovoRepositorioDoUsuario } from '../../servicos/requisicoes/repositorios';
+import { criarNovoRepositorioDoUsuario } from '../../servicos/requisicoes/repositorios';
 
 export default function CriarRepositorio({ route, navigation }) {
     const [nome, setNome] = useState('');
     const [data, setData] = useState('');
 
     async function Criar() {
-        const resultado = await CriarNovoRepositorioDoUsuario(nome, data, route.params.id);
+        const resultado = await criarNovoRepositorioDoUsuario(nome, data, route.params.id);
         if (resultado === 'sucesso') {
             Alert.alert('Repositório criado com sucesso!');
             navigation.goBack();

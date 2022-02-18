@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
 import estilos from './estilos';
-import { BuscarUsuario } from '../../servicos/requisicoes/usuario';
+import { buscarUsuario } from '../../servicos/requisicoes/usuario';
 
 export default function Principal({ navigation }) {
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [usuario, setUsuario] = useState({});
 
-    async function Buscar() {
-        const resultado = await BuscarUsuario(nomeUsuario);
+    async function buscar() {
+        const resultado = await buscarUsuario(nomeUsuario);
         if (resultado){
             setUsuario(resultado);
             setNomeUsuario('');
@@ -16,6 +16,7 @@ export default function Principal({ navigation }) {
         else {
             Alert.alert('Usuário não encontrado!');
             setNomeUsuario('');
+            setUsuario({});
         }
     }
 
@@ -51,13 +52,13 @@ export default function Principal({ navigation }) {
 
                 <TextInput
                     value={nomeUsuario}
-                    onChangeText={setNomeUsuario}
+                    onChangeText={(texto) => setNomeUsuario(texto)}
                     placeholder="Busque por um usuário"
                     autoCapitalize="none"
                     style={estilos.entrada}
                 />
 
-                <TouchableOpacity style={estilos.botao} onPress={Buscar}>
+                <TouchableOpacity style={estilos.botao} onPress={buscar}>
                     <Text style={estilos.textoBotao}>
                         Buscar
                     </Text>

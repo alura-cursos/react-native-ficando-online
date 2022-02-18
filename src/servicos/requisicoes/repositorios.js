@@ -1,50 +1,54 @@
 import api from '../api';
 
-export async function PegarRepositoriosDoUsuario(id){
-    const resultado = await api.get(`/posts/${id}/repos`).then(response => {
-        return response.data;
-    }).catch(error => {
-        console.log(error);
+export async function pegarRepositoriosDoUsuario(id){
+    try{
+        const resultado = await api.get(`/posts/${id}/repos`);
+        return resultado.data;
+    }
+    catch(erro){
+        console.log(erro);
         return [];
-    })
-    return resultado;
+    }
 }
 
-export async function SalvarRepositorioDoUsuario(id, nome, data, postId) {
-    const resultado = await api.put(`/repos/${id}`, {
-        id: id,
-        name: nome,
-        data: data,
-        postId: postId
-    }).then(() => {
+export async function salvarRepositorioDoUsuario(id, nome, data, postId) {
+    try {
+        await api.put(`/repos/${id}`, {
+            id: id,
+            name: nome,
+            data: data,
+            postId: postId
+        });
         return 'sucesso';
-    }).catch(error => {
-        console.log(error);
+    }
+    catch (erro) {
+        console.log(erro);
         return 'erro';
-    });
-    return resultado;
+    }
 }
 
-export async function CriarNovoRepositorioDoUsuario(nome, data, postId) {
-    const resultado = await api.post('/repos', {
-        name: nome,
-        data: data,
-        postId: postId
-    }).then(() => {
+export async function criarNovoRepositorioDoUsuario(nome, data, postId) {
+    try {
+        await api.post('/repos', {
+            name: nome,
+            data: data,
+            postId: postId
+        });
         return 'sucesso';
-    }).catch( error => {
-        console.log(error);
+    }
+    catch (erro) {
+        console.log(erro);
         return 'erro';
-    });
-    return resultado;
+    }
 }
 
-export async function DeletarRepositorioDoUsuario(id) {
-    const resultado = await api.delete(`/repos/${id}`).then(() => {
+export async function deletarRepositorioDoUsuario(id) {
+    try {
+        await api.delete(`/repos/${id}`);
         return 'sucesso';
-    }).catch(error => {
-        console.log(error);
+    }
+    catch (erro) {
+        console.log(erro);
         return 'erro';
-    });
-    return resultado;
+    }
 }

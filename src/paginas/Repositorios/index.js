@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import estilos from './estilos';
-import { PegarRepositoriosDoUsuario } from '../../servicos/requisicoes/repositorios';
+import { pegarRepositoriosDoUsuario } from '../../servicos/requisicoes/repositorios';
 
 export default function Repositorios({ route, navigation }) {
     const [repo, setRepo] = useState([]);
     const isFocused = useIsFocused();
 
     useEffect( async () => {
-        const resultado = await PegarRepositoriosDoUsuario(route.params.id);
+        const resultado = await pegarRepositoriosDoUsuario(route.params.id);
         setRepo(resultado);
     }, [isFocused]);
 
